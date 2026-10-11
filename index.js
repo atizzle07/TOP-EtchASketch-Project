@@ -1,16 +1,24 @@
-// Create main div element
 const mainContainer = document.querySelector('.main-container');
+let gridSize = 16;
+
+const title = document.createElement('div');
+title.classList.add('title');
+title.innerHTML = 'Etch A Sketch';
 
 
 const gridSizeButton = document.createElement('button');
-const gridContainer = document.createElement('div')
-
-gridContainer.classList.add('grid-container');
 gridSizeButton.id = 'grid-size-button';
-
 gridSizeButton.innerHTML = 'Select Grid Size';
 
-mainContainer.append(gridSizeButton, gridContainer)
+
+// Configure grid container and all elements within
+const gridContainer = document.createElement('div')
+gridContainer.classList.add('grid-container');
+for (let id = 0; id < gridSize.length; id++) {
+        
+}
+
+mainContainer.append(title, gridSizeButton, gridContainer)
 
 
 /*
