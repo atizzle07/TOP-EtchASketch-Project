@@ -10,6 +10,14 @@ const gridSizeButton = document.createElement('button');
 gridSizeButton.id = 'grid-size-button';
 gridSizeButton.innerHTML = 'Select Grid Size';
 
+const resetButton = document.createElement('button');
+resetButton.id = 'clear-button';
+resetButton.innerHTML = 'Reset Grid Color';
+
+const buttonContainer = document.createElement('div');
+buttonContainer.classList.add('button-container');
+buttonContainer.append(gridSizeButton, resetButton);
+
 // Configure grid container and all elements within
 const gridContainer = document.createElement('div')
 gridContainer.classList.add('grid-container');
@@ -26,4 +34,4 @@ for (let i = 0; i < gridSize; i++) {
     gridContainer.append(gridRow);
 }
 
-mainContainer.append(title, gridSizeButton, gridContainer)
+mainContainer.append(title, buttonContainer, gridContainer)
