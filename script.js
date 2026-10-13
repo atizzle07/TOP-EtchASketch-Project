@@ -35,3 +35,23 @@ for (let i = 0; i < gridSize; i++) {
 }
 
 mainContainer.append(title, buttonContainer, gridContainer)
+
+
+// =============== EVENT LISTENERS ===================
+
+gridSizeButton.addEventListener('click', (e)=> {
+    gridSize = parseInt(
+        prompt('Please enter a grid size between 4 and 64'));
+})
+
+resetButton.addEventListener('click',(e) => {
+    const squares = document.querySelectorAll('.grid-square');
+    squares.forEach((square) => square.style.backgroundColor = '');
+})
+
+gridContainer.addEventListener('mouseover', (event) => {
+    if (event.target.classList.contains('grid-square')) {
+        console.log(event.target)
+        event.target.style.backgroundColor = 'rgb(0,0,0)';
+    }
+})
