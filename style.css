@@ -51,6 +51,8 @@ button {
     display: flex;
     flex-direction: column;
     border: 8px solid var(--grid-border);
+    width: 800px;
+    height: 800px;
 }
 
 .grid-row {
@@ -59,8 +61,6 @@ button {
 
 .grid-square {
     background-color: var(--default-grid-color);
-    min-height: 30px;
-    min-width: 30px;
     flex: 0 0 auto;
 }
 
