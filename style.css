@@ -14,7 +14,7 @@ body {
 
 button {
     background-color: var(--button);
-    font-size: 18px;
+    font-size: 24px;
     font-style: italic;
     font-weight: 600;
     padding: 10px;
