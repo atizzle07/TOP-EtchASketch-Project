@@ -8,11 +8,9 @@ const gridContainer = document.querySelector('.grid-container');
 let gridSize = 24;
 ResetGridSize(gridSize);
 
-
 function ResetGridSize(gridSizeParam) {
     // Assumes grid to be 800px X 800px
     let gridSquareSize = Math.fround(800 / gridSizeParam)
-    console.log(`Grid size: ${gridSizeParam}\nSquare size: ${gridSquareSize}px`)
 
     for (let i = 0; i < gridSizeParam; i++) {
         const gridRow = document.createElement('div');
@@ -27,7 +25,6 @@ function ResetGridSize(gridSizeParam) {
         }
         gridContainer.append(gridRow);
     }
-
 }
 
 function GetGridSize() {
@@ -36,6 +33,45 @@ function GetGridSize() {
         response = parseInt(prompt('Please enter a grid size between 10 and 100.'))
     }
     return response;
+}
+
+function SetRandomGridColor(event) {
+    let r = Math.round(256 * Math.random())
+    let g = Math.round(256 * Math.random())
+    let b = Math.round(256 * Math.random())
+
+    event.target.style.backgroundColor = `rgb(${r},${g},${b})`;
+
+}
+
+function DarkenGridColors(event) {
+    event.target.style.backgroundColor = `rgb(0, 0, 0)`;
+}
+
+function ShadeGridColors(event, darkenValue) {
+    currentColor = window.getComputedStyle(event.target).backgroundColor
+    let rgbVals = ParseRGB(currentColor)
+    console.log(`starting value: ${rgbVals}`)
+
+    // applies darkening to rgb values and normalizes at 0
+    rgbVals.forEach((val, index) => {
+        if (rgbVals[index] - darkenValue < 0) {
+            rgbVals[index] = 0;
+        } else {
+            rgbVals[index] = val - darkenValue;
+        }
+    });
+    console.log(`End value: ${rgbVals}`)
+
+    event.target.style.backgroundColor = `rgb(${rgbVals[0]}, ${rgbVals[1]}, ${rgbVals[2]})`
+}
+
+function ParseRGB(rgb) {
+    // example: rgb(0, 0, 0)
+    // returns [0,0,0]
+    const colors = rgb.slice(4, -1)
+    const colorArr = colors.split(',').map(item => item.trim())
+    return colorArr
 }
 
 gridSizeButton.addEventListener('click', (e) => {
@@ -53,7 +89,9 @@ resetButton.addEventListener('click', (e) => {
 
 gridContainer.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('grid-square')) {
-        //TODO - Need to change this to slightly darken the background color instead of just color it black. Requires a get --> conditional logic --> set process.
-        event.target.style.backgroundColor = 'rgb(0,0,0)';
+        // SetRandomGridColor(event);
+        ShadeGridColors(event, Math.round(256 / 10));
     }
+
+    // TODO - Add toggle button to switch between random color mode, black mode, or shade mode
 })
