@@ -117,6 +117,7 @@ function Draw(event) {
     }
 }
 
+//TODO - Add a click event that when pressing a certain button it toggles off draw mode
 gridSizeButton.addEventListener('click', (e) => {
     gridSize = GetGridSize();
     gridContainer.replaceChildren();
