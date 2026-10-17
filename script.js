@@ -8,6 +8,7 @@ const gridSizeDisplay = document.querySelector('#current-gridsize')
 
 const drawModes = ['black', 'shaded', 'multicolor']
 let currentMode;
+let lastMode;
 const drawModeBlackButton = document.querySelector('#black')
 const drawModeShadedButton = document.querySelector('#shaded')
 const drawModeMulticolorButton = document.querySelector('#multicolor')
@@ -94,9 +95,22 @@ function SetDrawMode(mode) {
         case 'multicolor':
             currentMode = 'multicolor'
             break;
+        case 'none':
+            currentMode = 'none'
+            break;
         default:
             currentMode = 'shaded'
             break;
+    }
+}
+
+function ToggleDrawMode(e) {
+    if (e.key == ' ' && currentMode != 'none') { //if space is pressed and mode is not currently off, toggle draw mode on
+        lastMode = currentMode;
+        SetDrawMode('none')
+        console.log(`current mode: ${currentMode}\nlastMode: ${lastMode}`)
+    } else if (e.key == ' ' && currentMode == 'none') {//toggle draw mode off
+        SetDrawMode(lastMode);
     }
 }
 
@@ -104,12 +118,17 @@ function Draw(event) {
     switch (currentMode) {
         case 'black':
             DarkenGridColors(event)
+
             break;
         case 'shaded':
             ShadeGridColors(event, Math.round(256 / 10));
+
             break;
         case 'multicolor':
             SetRandomGridColor(event)
+
+            break;
+        case 'none':
             break;
         default:
             ShadeGridColors(event, Math.round(256 / 10));
@@ -156,4 +175,9 @@ drawModeMulticolorButton.addEventListener('click', (e) => {
     drawModeBlackButton.style.backgroundColor = '';
     drawModeShadedButton.style.backgroundColor = '';
     drawModeMulticolorButton.style.backgroundColor = 'rgb(208, 237, 58)';
+})
+
+document.addEventListener('keyup', (e) => {
+    e.preventDefault();
+    ToggleDrawMode(e)
 })
