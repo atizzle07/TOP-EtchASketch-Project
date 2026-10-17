@@ -5,6 +5,7 @@ const resetButton = document.querySelector('.clear-button');
 const buttonContainer = document.querySelector('button-container');
 const gridContainer = document.querySelector('.grid-container');
 const gridSizeDisplay = document.querySelector('#current-gridsize')
+const drawModeDisplay = document.querySelector('#draw-mode-display')
 
 const drawModes = ['black', 'shaded', 'multicolor']
 let currentMode;
@@ -105,13 +106,20 @@ function SetDrawMode(mode) {
 }
 
 function ToggleDrawMode(e) {
+    uiText = 'Draw Mode: ';
     if (e.key == ' ' && currentMode != 'none') { //if space is pressed and mode is not currently off, toggle draw mode on
         lastMode = currentMode;
         SetDrawMode('none')
+        drawModeDisplay.innerHTML = uiText + 'OFF'
+        drawModeDisplay.style.backgroundColor = 'rgb(252, 0, 0)'
         console.log(`current mode: ${currentMode}\nlastMode: ${lastMode}`)
     } else if (e.key == ' ' && currentMode == 'none') {//toggle draw mode off
         SetDrawMode(lastMode);
+        drawModeDisplay.innerHTML = uiText + 'ON'
+        drawModeDisplay.style.backgroundColor = 'rgb(0, 236, 51)'
     }
+
+    //TODO - when button is pressed when draw mode is off it should not toggle it back on.
 }
 
 function Draw(event) {
