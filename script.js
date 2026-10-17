@@ -4,6 +4,13 @@ const gridSizeButton = document.querySelector('.grid-size-button');
 const resetButton = document.querySelector('.clear-button');
 const buttonContainer = document.querySelector('button-container');
 const gridContainer = document.querySelector('.grid-container');
+const gridSizeDisplay = document.querySelector('#current-gridsize')
+
+const drawModes = ['black', 'shaded', 'multicolor']
+const drawModeBlackButton = document.querySelector('#black')
+const drawModeShadedButton = document.querySelector('#shaded')
+const drawModeMulticolorButton = document.querySelector('#multicolor')
+
 
 let gridSize = 24;
 ResetGridSize(gridSize);
@@ -25,6 +32,7 @@ function ResetGridSize(gridSizeParam) {
         }
         gridContainer.append(gridRow);
     }
+    gridSizeDisplay.innerHTML = `Grid Size = ${gridSizeParam} x ${gridSizeParam}`
 }
 
 function GetGridSize() {
@@ -51,7 +59,7 @@ function DarkenGridColors(event) {
 function ShadeGridColors(event, darkenValue) {
     currentColor = window.getComputedStyle(event.target).backgroundColor
     let rgbVals = ParseRGB(currentColor)
-    console.log(`starting value: ${rgbVals}`)
+    // console.log(`starting value: ${rgbVals}`)
 
     // applies darkening to rgb values and normalizes at 0
     rgbVals.forEach((val, index) => {
@@ -61,7 +69,7 @@ function ShadeGridColors(event, darkenValue) {
             rgbVals[index] = val - darkenValue;
         }
     });
-    console.log(`End value: ${rgbVals}`)
+    // console.log(`End value: ${rgbVals}`)
 
     event.target.style.backgroundColor = `rgb(${rgbVals[0]}, ${rgbVals[1]}, ${rgbVals[2]})`
 }
@@ -74,15 +82,17 @@ function ParseRGB(rgb) {
     return colorArr
 }
 
+function SetDrawMode() {
+    // TODO - Add toggle button to switch between random color mode, black mode, or shade mode
+}
+
 gridSizeButton.addEventListener('click', (e) => {
-    console.log('Grid size button clicked...')
     gridSize = GetGridSize();
     gridContainer.replaceChildren();
     ResetGridSize(gridSize)
 })
 
 resetButton.addEventListener('click', (e) => {
-    console.log('Reset size button clicked...')
     const squares = document.querySelectorAll('.grid-square');
     squares.forEach((square) => square.style.backgroundColor = '');
 })
@@ -92,6 +102,16 @@ gridContainer.addEventListener('mouseover', (event) => {
         // SetRandomGridColor(event);
         ShadeGridColors(event, Math.round(256 / 10));
     }
+})
 
-    // TODO - Add toggle button to switch between random color mode, black mode, or shade mode
+drawModeBlackButton.addEventListener('click', (e) => {
+    console.log('Black button clicked');
+})
+
+drawModeShadedButton.addEventListener('click', (e) => {
+    console.log('Shaded button clicked');
+})
+
+drawModeMulticolorButton.addEventListener('click', (e) => {
+    console.log('Multicolor button clicked');
 })

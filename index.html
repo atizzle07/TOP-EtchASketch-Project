@@ -3,20 +3,33 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
     <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 
 <body>
     <div class="main-container">
-        <div class="title">Etch A Sketch</div>
-        <div class="button-container">
-            <button class="grid-size-button">Select Grid Size</button>
-            <button class="clear-button">Reset Grid Color</button>
-        </div>
-        <div class="grid-container">
-            
+        <h1 class="title">Etch A Sketch</h1>
+        <div class="detail-section">
+            <div class="navbar">
+                <h3 id="current-gridsize">Grid Size: </h3>
+                <button class="grid-size-button">Select Grid Size</button>
+                <button class="clear-button">Reset Grid Color</button>
+                <div class="draw-mode-container">
+                    <h3>Select Draw Mode: </h3>
+                    <div class="draw-mode-item" id="black">
+                        <button class="draw-mode-button" id="black">Black</button>
+                    </div>
+                    <div class="draw-mode-item" id="shaded">
+                        <button class="draw-mode-button" id="shaded">Shaded</button>
+                    </div>
+                    <div class="draw-mode-item" id="multicolor">
+                        <button class="draw-mode-button" id="multi">Multicolor</button>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-container"></div>
         </div>
     </div>
     <script src="script.js"></script>
