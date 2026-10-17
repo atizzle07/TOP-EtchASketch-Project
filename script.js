@@ -7,6 +7,7 @@ const gridContainer = document.querySelector('.grid-container');
 const gridSizeDisplay = document.querySelector('#current-gridsize')
 
 const drawModes = ['black', 'shaded', 'multicolor']
+let currentMode;
 const drawModeBlackButton = document.querySelector('#black')
 const drawModeShadedButton = document.querySelector('#shaded')
 const drawModeMulticolorButton = document.querySelector('#multicolor')
@@ -82,8 +83,38 @@ function ParseRGB(rgb) {
     return colorArr
 }
 
-function SetDrawMode() {
-    // TODO - Add toggle button to switch between random color mode, black mode, or shade mode
+function SetDrawMode(mode) {
+    switch (mode) {
+        case 'black':
+            currentMode = 'black'
+            break;
+        case 'shaded':
+            currentMode = 'shaded'
+            break;
+        case 'multicolor':
+            currentMode = 'multicolor'
+            break;
+        default:
+            currentMode = 'shaded'
+            break;
+    }
+}
+
+function Draw(event) {
+    switch (currentMode) {
+        case 'black':
+            DarkenGridColors(event)
+            break;
+        case 'shaded':
+            ShadeGridColors(event, Math.round(256 / 10));
+            break;
+        case 'multicolor':
+            SetRandomGridColor(event)
+            break;
+        default:
+            ShadeGridColors(event, Math.round(256 / 10));
+            break;
+    }
 }
 
 gridSizeButton.addEventListener('click', (e) => {
@@ -99,19 +130,29 @@ resetButton.addEventListener('click', (e) => {
 
 gridContainer.addEventListener('mouseover', (event) => {
     if (event.target.classList.contains('grid-square')) {
-        // SetRandomGridColor(event);
-        ShadeGridColors(event, Math.round(256 / 10));
+        Draw(event);
     }
 })
 
 drawModeBlackButton.addEventListener('click', (e) => {
-    console.log('Black button clicked');
+    SetDrawMode('black');
+    drawModeBlackButton.style.backgroundColor = 'rgb(208, 237, 58)';
+    drawModeShadedButton.style.backgroundColor = '';
+    drawModeMulticolorButton.style.backgroundColor = '';
 })
 
 drawModeShadedButton.addEventListener('click', (e) => {
     console.log('Shaded button clicked');
+    SetDrawMode('shaded');
+    drawModeBlackButton.style.backgroundColor = '';
+    drawModeShadedButton.style.backgroundColor = 'rgb(208, 237, 58)';
+    drawModeMulticolorButton.style.backgroundColor = '';
 })
 
 drawModeMulticolorButton.addEventListener('click', (e) => {
     console.log('Multicolor button clicked');
+    SetDrawMode('multicolor');
+    drawModeBlackButton.style.backgroundColor = '';
+    drawModeShadedButton.style.backgroundColor = '';
+    drawModeMulticolorButton.style.backgroundColor = 'rgb(208, 237, 58)';
 })
