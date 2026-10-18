@@ -126,15 +126,12 @@ function Draw(event) {
     switch (currentMode) {
         case 'black':
             DarkenGridColors(event)
-
             break;
         case 'shaded':
             ShadeGridColors(event, Math.round(256 / 10));
-
             break;
         case 'multicolor':
-            SetRandomGridColor(event)
-
+            SetRandomGridColor(event)xf .
             break;
         case 'none':
             break;
